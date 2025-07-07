@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Echo General Dispatch Stuff
         env:
-          GENERAL_COMMIT_PAYLOAD: ${{ github.event.client_payload | default('{"default":"default"}') }}
+          GENERAL_COMMIT_PAYLOAD: ${{ github.event.client_payload }}
         run: |
           echo "General Commit Payload: ${GENERAL_COMMIT_PAYLOAD}"
