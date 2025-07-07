@@ -1,0 +1,17 @@
+name: Update from github-actions-producer
+on:
+  repository_dispatch:
+    types: [general-commit]
+jobs:
+  update-after-general-commit:
+    name: "Update after General Commit"
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref_name }}
+      cancel-in-progress: false
+    steps:
+      - name: Echo General Dispatch Stuff
+        env:
+          GENERAL_COMMIT_PAYLOAD: ${{ github.event.client_payload | default('{"default":"default"}') }}
+        run: |
+          echo "General Commit Payload: ${GENERAL_COMMIT_PAYLOAD}"
